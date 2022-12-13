@@ -1,11 +1,11 @@
 // import { useFormik } from 'formik'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import Modal from './Modal'
 
 
 const Keep = () => {
-    // const [localNote, setlocalNote] = useState([])
-   
+    
     const [notes, setNotes] = useState([])
     const [addNewNote, setAddNewNote] = useState({
         title: '',
@@ -46,39 +46,12 @@ const Keep = () => {
     const remindMe = () => {
         
     }
-    const collaborator =()=>{
-        return(
-            <>
-                <button  className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-                </button>
-
-                <div className='modal fade' id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Collaborators</h5>
-                        <button className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <button className=''><p>Person or Email to share with</p></button>
-                    </div>
-                    <div className="modal-footer">
-                        <button  className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button  className="btn btn-primary">Save changes</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </>
-        )
-    }
    
 
   return (
     <>
+
+
         <div className='col ps-0'>
             <h1>Keep</h1>
             <div className='container border rounded p-2 w-50 shadow'>
@@ -98,16 +71,17 @@ const Keep = () => {
                 </div>
 
             </div>
+            <Modal/>
             <div className='container shadow my-3 p-4 row' >
               {
                 notes.map((each,i)=>(
-                    <div className='container border  shadow my-3 p-2 col-5 mx-3' key={i}>
+                    <div className='container border  shadow my-3 p-3 col-5 mx-3' key={i}>
                         <p>{each.title}</p>
                         <p>{each.body}</p>
 
                                 <button className='btn btn-light'>edit</button>
                                 <div className='dropdown'>
-                                    <button className='btn btn-light' onClick={collaborator}>col</button>
+                                    <button type='button' data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-light'>col</button>
                                 </div>
                                     <div className="dropdown w-50 container ">
                                         <button className={`btn btn-light `+{show}} onClick={remindMe}>Rm</button>
@@ -157,7 +131,20 @@ const Keep = () => {
 
                                         </div>
                                     </div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                              
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><button class="dropdown-item" >delete note</button></li>
+                                                <li><button class="dropdown-item" >Add label</button></li>
+                                                <li><button class="dropdown-item" >Add drawing</button></li>
+                                                <li><button class="dropdown-item" >Make a copy</button></li>
+                                                <li><button class="dropdown-item" >Show checkbox</button></li>
+                                            </ul>
+                                        </div>
 
+                                   
                         {/* </div> */}
                            
 
