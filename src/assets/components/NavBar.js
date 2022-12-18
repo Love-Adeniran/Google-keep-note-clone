@@ -7,7 +7,7 @@ const NavBar = () => {
             <div className='row'>
             <div className='col'>
                 <h1 className='text-light fs-5 '>
-                    <span><i class="fa fa-hamburger text-light fs-1"></i></span>
+                    <span><i className="fa fa-hamburger text-light fs-1"></i></span>
                 </h1>
             </div>
             <div className='col'>
