@@ -15,7 +15,7 @@ const Keep = () => {
       setNotes(JSON.parse(localStorage.Keep))
     }
   }, [])
-//   console.log(notes)
+  //   console.log(notes)
 
   const handleChange = (e) => {
     let name = e.target.name
@@ -36,42 +36,46 @@ const Keep = () => {
   const delet = (i) => {
     let index = i
     let newNotes = [...notes]
-    newNotes.splice(index,1)
+    newNotes.splice(index, 1)
     setNotes(newNotes)
     localStorage.Keep = JSON.stringify(newNotes)
   }
-  const edit =(i)=>{
+  const edit = (i) => {
     let ind = i
     let editNote = [...notes]
-    setAddNewNote({
+    let editedNote = {
         title: editNote[i].title,
         body: editNote[i].body
-    })
-    console.log(editNote);
+    }
+    setAddNewNote(editedNote)
+    console.log(editNote)
+    if (editedNote.title == '' || editedNote.body == '') {
+        alert('hiiiii')
+      }
   }
 
   return (
     <>
-      <div className="col ps-0">
-        <h1>Keep</h1>
+      <div className="col ps-0 mt-4">
+        {/* <h1 className='text-light'>Keep</h1> */}
         <div className="container border rounded p-2 w-50 shadow">
           <div className="modal-body">
             <div className="p-2">
-              <p>Take a note...</p>
+              <p className='text-light'>Take a note...</p>
               <div className="">
                 <input
                   type="text"
                   name="title"
                   value={addNewNote.title}
                   onChange={handleChange}
-                  className="w-100 p-2 form-control"
+                  className="w-100 p-2 form-control bg-dark text-light"
                   placeholder="Take a note..."
                 />
                 <textarea
                   name="body"
                   value={addNewNote.body}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control bg-dark outline-none text-light"
                 />
                 <div className="modal-footer">
                   <button onClick={add} className="btn btn-light my-2">
@@ -83,14 +87,16 @@ const Keep = () => {
           </div>
         </div>
         <Modal />
-        <div className="container shadow my-3 p-4 row ">
+        <div className="container row  mx-0 my-3">
           {notes.map((each, i) => (
             <div
-              className="container border  shadow my-3 p-3 col-5 mx-3 "
-              key={i} onClick={()=>edit(i)}>
-              <p>{each.title}</p>
-              <p>{each.body}</p>
-              <div className="dropdown">
+              className=" border  shadow my-3 p-3 col-5 mx-3 "
+              key={i}>
+              <div onClick={() => edit(i)}>
+                <p className='text-light'>{each.title}</p>
+                <p className='text-light'>{each.body}</p>
+              </div>
+              <div className="dropdown text-light ">
                 <button
                   type="button"
                   data-bs-toggle="modal"
@@ -100,57 +106,65 @@ const Keep = () => {
                   col
                 </button>
               </div>
-              <div className="dropdown w-50 container ">
-                <button className={`btn btn-light `}>Rm</button>
-                {/* <span>Mouse over me</span> */}
-                <div className="dropdown-content">
-                  <h4>Reminder</h4>
-                  <div>
-                    <button className="btn p-0 ">
+
+              <div className="dropdown px-2">
+                <button
+                  className="btn btn-secondary"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  RM
+                </button>
+                <ul className="dropdown-menu p-4 text-light">
+                    <h4 className="">Reminder</h4>
+                  <li>
+                    <button className="dropdown-item">
                       <div className="row">
-                        <div className="col-6">Later Today</div>
+                        <div className="col-6 "><small className=''>Later Today</small></div>
                         <div className="col-6">
-                          <p>8:00 PM</p>
+                          <small>8:00 PM</small>
                         </div>
                       </div>
                     </button>
-                  </div>
-                  <div>
-                    <button className="btn p-0 ">
+                  </li>
+                  <li>
+                    <button className="dropdown-item">
                       <div className="row">
                         <div className="col-6">
-                          <p>Tomorrow</p>
+                          <small className=''>Tomorrow</small>
                         </div>
                         <div className="col-6">
-                          <p>8:00 AM</p>
+                          <small className=''>8:00 AM</small>
                         </div>
                       </div>
                     </button>
-                  </div>
-                  <div>
-                    <button className="btn p-0 ">
-                      <div className="row">
-                        <div className="col-6">
-                          <p>Next Week</p>
+                  </li>
+                  <li>
+                    <button className="dropdown-item p-0">
+                      <div className="row p-0 m-0">
+                        <div className="col-6 p-0 m-0">
+                          <small className=''>Next week</small>
                         </div>
-                        <div className="col-6">
-                          <p>MON, 8:00 AMN</p>
+                        <div className="col-6 p-0 m-0">
+                          <small className=''>Mon, 8:00 AM</small>
                         </div>
                       </div>
                     </button>
-                  </div>
-                  <div>
-                    <button className="btn p-0 ">
-                      <p>Pick date and time</p>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">
+                      <small className=''>Pick date and time</small>
                     </button>
-                  </div>
-                  <div>
-                    <button className="btn p-0 ">
-                      <p>Pick place</p>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">
+                      <small className=''>Pick place</small>
                     </button>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </div>
+
               <div className="dropdown">
                 <button
                   className="btn btn-secondary dropdown-toggle"

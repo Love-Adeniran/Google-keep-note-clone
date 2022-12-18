@@ -7,6 +7,7 @@ import Bars from './assets/components/Bars'
 import Keep from './assets/components/Keep'
 import NavBar from './assets/components/NavBar'
 import Reminder from './assets/components/Reminder'
+
 import Trash from './assets/components/Trash'
 
 
@@ -16,10 +17,11 @@ const App = () => {
     
     <BrowserRouter>
         <NavBar/>
+      
             {/* <Route path='/signup' element={<SignUp/>}/> */}
         <Routes>
            <Route path='/' element={<Bars/>} children={[
-                <Route path='/keep' element={<Keep/>}/>,
+                <Route path='/' element={<Keep/>}/>,
                 <Route path='/reminder' element={<Reminder/>}/>,
                 <Route path='/archive' element={<Archive/>}/>,
                 <Route path='/trash' element={<Trash />}/>
