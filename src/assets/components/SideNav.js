@@ -2,42 +2,45 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const SideNav = () => {
+    let backg 
   return (
     <>
-      <div className="container col-3 bg-dark text-light ">
+      <div className="container col-3 bg-dark text-light pe-5">
         <div className="container pt-2 m-0 fill p-0 ps-1 ">
-          <div className="px-2 border py-0 rounded-end">
+          <div className="px-1 border py-0 rounded-pill backg" onClick={()=>{
+                backg = 'bg-warning'
+          }}>
             <Link to="/" className="text-decoration-none text-light ">
-              <div className="  my-2  px-3 py-2">
-                <p className="d-inline">Notes</p>
+              <div className="  my-1  px-1 py-0">
+                <p className="d-inline"><i className="material-icons fs-4 me-3 ms-4">lightbulb</i>Notes</p>
               </div>
             </Link>
           </div>
-          <div className='px-2 border py-0 rounded-end my-3'>
+          <div className='px-1 border py-0 rounded-pill my-2'>
             <Link to="/reminder" className="text-decoration-none text-light ">
-              <div className=" my-2 ">
-                <p className="d-inline">Reminder</p>
+              <div className=" my-1 px-1 py-0">
+                <p className="d-inline"><i className='material-icons me-3 ms-4'>notifications_none</i> Reminder</p>
               </div>
             </Link>
           </div>
-          <div className='px-2 border py-0 rounded-end my-3'>
-            <Link to="/Edit" className="text-decoration-none text-light">
-              <div className="  my-2">
-                <p className="d-inline">Edit Labels</p>
+          <div className='px-1 border py-0 rounded-pill my-2'>
+            <Link to="#" className="text-decoration-none text-light">
+              <div className="  my-1 px-1 py-0">
+                <p className="d-inline"><i className='material-icons me-3 ms-4'>edit</i>Edit Labels</p>
               </div>
             </Link>
           </div>
-          <div className='px-2 border py-0 rounded-end my-3'>
+          <div className='px-1 border py-0 rounded-pill my-2'>
             <Link to="/archive" className="text-decoration-none text-light">
-              <div className=" my-2">
-                <p className="d-inline">Archive</p>
+              <div className=" my-1 px-1 py-0">
+                <p className="d-inline"><i className='material-icons me-3 ms-4'>archive</i>Archive</p>
               </div>
             </Link>
           </div>
-          <div className='px-2 border py-0 rounded-end my-3'>
+          <div className='px-1 border py-0 rounded-pill my-2'>
             <Link to="/trash" className="text-decoration-none text-light">
-              <div className=" my-2">
-                <p className="d-inline">Trash</p>
+              <div className=" my-1 px-1 py-0">
+                <p className="d-inline"><i className='material-icons me-3 ms-4'>delete_outline</i>Trash</p>
               </div>
             </Link>
           </div>
