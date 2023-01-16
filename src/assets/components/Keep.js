@@ -5,6 +5,7 @@ import Modal from './Modal'
 
 const Keep = () => {
   const [notes, setNotes] = useState([])
+  const [addArchive, setaddArchive] = useState([])
   const [addNewNote, setAddNewNote] = useState({
     title: '',
     body: '',
@@ -13,6 +14,9 @@ const Keep = () => {
   useEffect(() => {
     if (localStorage.Keep) {
       setNotes(JSON.parse(localStorage.Keep))
+    }
+    if (localStorage.archive){
+        setaddArchive(JSON.parse(localStorage.archive))
     }
   }, [])
   //   console.log(notes)
@@ -44,9 +48,11 @@ const Keep = () => {
   const archiveNote = (i) => {
     let idx = i
     let newNotes = [...notes]
-    let noteIndex = newNotes[idx]
+    let noteIndex = [...addArchive,newNotes[idx]]
+    setaddArchive(noteIndex)
+    console.log(noteIndex);
     localStorage.archive = JSON.stringify(noteIndex)
-    // alert(newNotes[idx])
+    // console.log(newNotes[idx])
     newNotes.splice(idx, 1)
     setNotes(newNotes)
     localStorage.Keep = JSON.stringify(newNotes)
@@ -131,23 +137,23 @@ const Keep = () => {
                     data-bs-target="#exampleModal"
                     className="btn  rounded-circle p-0 "
                   >
-                    <span class="material-icons text-light me-0">
+                    <span className="material-icons text-light me-0">
                       person_add_alt
                     </span>
                   </button>
                 </div>
 
-                <div className="dropdown px-1 col-2 p-2">
+                <div className="dropdown px-1 col-2 p-2 ">
                   <button
                     className="btn "
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i class="material-icons text-light">add_alert</i>
+                    <i className="material-icons text-light">add_alert</i>
                   </button>
-                  <ul className="dropdown-menu p-4">
-                    <h4 className="">Reminder</h4>
+                  <ul className="dropdown-menu p-4 ">
+                    <h4 className="text-">Reminder</h4>
                     <li>
                       <button className="dropdown-item">
                         <div className="row">
