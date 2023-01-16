@@ -222,7 +222,7 @@ const Keep = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <span class="material-icons">more_vert</span>
+                    <span className="material-icons">more_vert</span>
                   </button>
                   <ul className="dropdown-menu">
                     <li>
