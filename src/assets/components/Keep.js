@@ -5,6 +5,7 @@ import Modal from './Modal'
 
 const Keep = () => {
   const [notes, setNotes] = useState([])
+  const [addTrash, setAddTrash] = useState([])
   const [addArchive, setaddArchive] = useState([])
   const [addNewNote, setAddNewNote] = useState({
     title: '',
@@ -18,7 +19,12 @@ const Keep = () => {
     if (localStorage.archive){
         setaddArchive(JSON.parse(localStorage.archive))
     }
-  }, [])
+    if (localStorage.trash){
+        setAddTrash(JSON.parse(localStorage.trash))
+    }
+  },
+   [])
+  
   //   console.log(notes)
 
   const handleChange = (e) => {
@@ -40,6 +46,8 @@ const Keep = () => {
   const delet = (i) => {
     let index = i
     let newNotes = [...notes]
+    let trashNote = [...addTrash,newNotes[index]]
+    localStorage.trash = JSON.stringify(trashNote)
     newNotes.splice(index, 1)
     setNotes(newNotes)
     localStorage.Keep = JSON.stringify(newNotes)

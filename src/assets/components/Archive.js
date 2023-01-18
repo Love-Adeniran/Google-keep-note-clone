@@ -19,17 +19,12 @@ const Archive = () => {
    }, [])
 
    const unarchiveNote=(i)=>{
-    // console.log(localStorage.keep)
-    if(localStorage.keep){
-        setUnArchiveNote(JSON.parse(localStorage.keep))
-        console.log(localStorage.keep);
-       
-      }
     let unarchiveIndex = i
     let archivedNote = [...archiveNote]
     let unarchiveNoteIndex = [...unArchiveNote,archivedNote[unarchiveIndex]]
     setUnArchiveNote(unarchiveNoteIndex);
     console.log(unarchiveNoteIndex);
+    console.log(localStorage.keep);
     // localStorage.Keep = JSON.stringify(unarchiveNoteIndex)
     // unarchiveNote.splice(unarchiveIndex,1)
     // setArchiveNote(archiveNote)
