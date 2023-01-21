@@ -5,39 +5,46 @@ import { useEffect } from 'react'
 const Archive = () => {
     const [archiveNote, setArchiveNote] = useState([])
     const [unArchiveNote, setUnArchiveNote] = useState([])
-   
+   const [trash, setTrash] = useState([])
    useEffect(() => {
     if (localStorage.archive) {
         setArchiveNote(JSON.parse(localStorage.archive))
-       console.log(localStorage.archive);
       }
-    // if(localStorage.keep){
-    //     setUnArchiveNote(JSON.parse(localStorage.keep))
-    //     console.log(localStorage.keep);
-       
-    //   }
+    if(localStorage.Keep){
+        setUnArchiveNote(JSON.parse(localStorage.Keep))
+      }
+    if(localStorage.trash){
+        setTrash(JSON.parse(localStorage.trash))
+      }
    }, [])
 
    const unarchiveNote=(i)=>{
     let unarchiveIndex = i
     let archivedNote = [...archiveNote]
     let unarchiveNoteIndex = [...unArchiveNote,archivedNote[unarchiveIndex]]
+    // console.log(unarchiveNoteIndex);
     setUnArchiveNote(unarchiveNoteIndex);
-    console.log(unarchiveNoteIndex);
-    console.log(localStorage.keep);
-    // localStorage.Keep = JSON.stringify(unarchiveNoteIndex)
-    // unarchiveNote.splice(unarchiveIndex,1)
-    // setArchiveNote(archiveNote)
-    // console.log(archiveNote);
-    // localStorage.archive = JSON.stringify(archiveNote)
+    localStorage.Keep = JSON.stringify(unarchiveNoteIndex)
+    archivedNote.splice(unarchiveIndex,1)
+    setArchiveNote(archivedNote)
+    localStorage.archive = JSON.stringify(archivedNote)
    }
    
    const edit =()=>{
 
    }
-   const delet =()=>{
-
-}
+   const delet = (i) => {
+    let trashIndex = i
+    let note = [...archiveNote]
+    console.log(note)
+    let trashNoteIndex =  [...trash,note[trashIndex]]
+    // console.log(trashNoteIndex);
+    localStorage.trash = JSON.stringify(trashNoteIndex)
+    note.splice(trashIndex, 1)
+    setArchiveNote(note)
+    console.log(note)
+    localStorage.archive = JSON.stringify(note)
+  }
 
   return (
     <>

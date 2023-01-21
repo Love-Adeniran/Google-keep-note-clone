@@ -128,12 +128,14 @@ const Keep = () => {
           </div>
         </div>
         <Modal />
+
         <div className="container row  mx-0 my-1 rounded">
           {notes.map((each, i) => (
             <div className=" border border-secondary rounded my-1 px-2 col-3 mx-3 " key={i}>
               <div onClick={() => edit(i)} className="py-1">
                 <p className="text-light">{each.title}</p>
                 <p className="text-light">{each.body}</p>
+                <div className='border border-secondary rounded-pill'></div>
               </div>
 
               <div className="row p-0">
@@ -165,7 +167,7 @@ const Keep = () => {
                     <li>
                       <button className="dropdown-item">
                         <div className="row">
-                          <div className="col-6 ">
+                          <div className="col-6 " onClick={()=>alert('say Hello')}>
                             <small className="">Later Today</small>
                           </div>
                           <div className="col-6">

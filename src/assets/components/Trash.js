@@ -6,11 +6,9 @@ const Trash = () => {
   useEffect(() => {
     if (localStorage.trash) {
       setTrashedNote(JSON.parse(localStorage.trash))
-      //   console.log(JSON.parse(localStorage.trash))
     }
     if(localStorage.Keep){
         setRestoreNote(JSON.parse(localStorage.Keep))
-        console.log(JSON.parse(localStorage.Keep));
     }
   }, [])
 
@@ -28,8 +26,9 @@ const Trash = () => {
     let allTrashedNote = [...trashedNote]
     let restoreTrashNote = [...restoreNote,allTrashedNote[trashIndex]]
     setRestoreNote(restoreTrashNote)
+    // console.log(restoreTrashNote);
     localStorage.Keep = JSON.stringify(restoreTrashNote)
-    console.log(JSON.parse(localStorage.Keep));
+    // console.log(JSON.parse(localStorage.Keep));
     allTrashedNote.splice(trashIndex, 1)
     setTrashedNote(allTrashedNote)
     localStorage.trash = JSON.stringify(allTrashedNote)
