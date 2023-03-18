@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NavBar = () => {
+const NavBar = ({title,setTitle}) => {
   return (
     <>
       <div className="container-fluid bg-dark mb-0 p-0 border-bottom">
@@ -8,12 +8,12 @@ const NavBar = () => {
           <div className="col-1">
             <i className="material-icons text-light p-3 fs-2">menu</i>
           </div>
-          <div className="col-1">
+          <div className="col">
             <img src="/" alt="" />
           </div>
 
           <div className="col-2">
-            <h1 className="text-light">Keep</h1>
+            <h1 className="text-light"> {title}</h1>
           </div>
           <div className="col-6">
             <input
@@ -25,7 +25,7 @@ const NavBar = () => {
           <div className="col">
             <div className="row">
               <div className="col-2">
-                <i className="text-light material-icons pt-3 px-2">refresh</i>
+                <a href='/' className="text-light material-icons pt-3 px-1 text-decoration-none">refresh</a>
               </div>
               <div className="col-2">
                 <i className="text-light material-icons pt-3 px-2">grid_view</i>

@@ -7,6 +7,7 @@ const Keep = () => {
   const [notes, setNotes] = useState([])
   const [addTrash, setAddTrash] = useState([])
   const [addArchive, setaddArchive] = useState([])
+  const [editIndex, setEditIndex] = useState(null)
   const [addNewNote, setAddNewNote] = useState({
     title: '',
     body: '',
@@ -28,21 +29,43 @@ const Keep = () => {
   //   console.log(notes)
 
   const handleChange = (e) => {
-    let name = e.target.name
-    let value = e.target.value
-    setAddNewNote({ ...addNewNote, [name]: value })
+    if(editIndex){
+        let name = e.target.name
+        let value = e.target.value
+        setEditIndex({ ...editIndex, [name]: value })
+    }
+    else{
+        let name = e.target.name
+        let value = e.target.value
+        setAddNewNote({ ...addNewNote, [name]: value })
+
+    }
+    
   }
 
   const add = () => {
-    if (addNewNote.title === '' && addNewNote.body === '') {
-      alert('hi')
-    } else {
-      let noteArr = [...notes, addNewNote]
-      setNotes(noteArr)
-      localStorage.Keep = JSON.stringify(noteArr)
+    setAddNewNote(editIndex)
+    if(editIndex===null){
+        let noteArr = [...notes, addNewNote]
+        setNotes(noteArr)
+        localStorage.Keep = JSON.stringify(noteArr)
+        setAddNewNote({
+            title: '',
+            body: '',
+        })
     }
+    else if (addNewNote.title === '' && addNewNote.body === '') {
+            alert('Empty')
+          }
+    else{
+        let editNote = [...notes, editIndex]
+        setNotes(editNote)
+        console.log(notes);
+        } 
+    
+   
   }
-  let disp = 'note-box'
+//   let disp = 'note-box'
   const delet = (i) => {
     let index = i
     let newNotes = [...notes]
@@ -71,25 +94,27 @@ const Keep = () => {
   const edit = (i) => {
     ind = i
     let editNote = [...notes]
+    editedNote = editNote.find((each, i) => i === ind)
     editedNote = {
       title: editNote[i].title,
       body: editNote[i].body,
     }
-    setAddNewNote(editedNote)
-    console.log(editNote)
-    // if (editedNote.title === '' || editedNote.body === '') {
-    //     alert('hiiiii')
-    //   }
+    setEditIndex(editedNote)
+
+    
   }
-  const update = () => {
-    let updatedNote = {
-      title: addNewNote.title,
-      body: addNewNote.body,
+  const update = (i) => {
+    ind = i
+    let editNote = [...notes]
+    // const eachPost = allPost.find((post, i) => i == index)
+    editedNote = editNote.find((each, i) => i === ind)
+    editedNote = {
+      title: editNote[i].title,
+      body: editNote[i].body,
     }
-    setNotes(editedNote[ind])
-    console.log(editedNote[ind])
-    // editedNote[ind] = updatedNote
-    // console.log(editedNote[ind])
+    let editIndex = notes[ind]
+    
+    setNotes(editIndex)
   }
 
   return (
@@ -104,24 +129,24 @@ const Keep = () => {
                 <input
                   type="search"
                   name="title"
-                  value={addNewNote.title}
+                  value={editIndex===null? addNewNote.title: editIndex.title}
                   onChange={handleChange}
                   className="w-100 p-2 form-control bg-dark text-light"
                   placeholder="Take a note..."
                 />
                 <textarea
                   name="body"
-                  value={addNewNote.body}
+                  value={editIndex===null? addNewNote.body:editIndex.body}
                   onChange={handleChange}
                   className="form-control bg-dark outline-none text-light"
                 />
                 <div className="modal-footer">
-                  <button onClick={update} className="btn btn-light my-2">
-                    Update
+                  <button onClick={add} className="btn btn-light my-2" >{editIndex == null? "Close":"Update"}
+                   
                   </button>
-                  <button onClick={add} className="btn btn-light my-2">
+                  {/* <button onClick={add} className="btn btn-light my-2">
                     Close
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -162,6 +187,7 @@ const Keep = () => {
                   >
                     <i className="material-icons text-light">add_alert</i>
                   </button>
+
                   <ul className="dropdown-menu p-4 ">
                     <h4 className="text-">Reminder</h4>
                     <li>

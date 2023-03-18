@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { Route, Routes } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 import './App.css'
@@ -12,15 +13,17 @@ import Trash from './assets/components/Trash'
 
 
 const App = () => {
+   const [title, setTitle] = useState([])
+
   return (
     <>
     
     <BrowserRouter>
-        <NavBar/>
+        <NavBar title={title} setTitle ={setTitle}/>
       
             {/* <Route path='/signup' element={<SignUp/>}/> */}
         <Routes>
-           <Route path='/' element={<Bars/>} children={[
+           <Route path='/' element={<Bars title={title} setTitle ={setTitle}/>} children={[
                 <Route path='/' element={<Keep/>}/>,
                 <Route path='/reminder' element={<Reminder/>}/>,
                 <Route path='/archive' element={<Archive/>}/>,
